@@ -1,20 +1,18 @@
-var DOWNLOAD_URL = "/.netlify/functions/download";
+var GITHUB_API = "https://api.github.com/repos/iitiankrishnaa-svg/ClassChat/releases/latest";
+var FALLBACK_URL = "https://github.com/iitiankrishnaa-svg/ClassChat/releases/latest";
+var latestAPKUrl = FALLBACK_URL;
 
 function downloadAPK() {
-  // Navigate directly to Netlify function which redirects to latest APK
-  window.location.href = DOWNLOAD_URL;
+  window.location.href = latestAPKUrl;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var btn = document.getElementById("downloadBtn");
   var versionLabel = document.getElementById("versionLabel");
 
-  // Fetch version info for display only (does not affect the download)
-  var GITHUB_API = "https://api.github.com/repos/iitiankrishnaa-svg/ClassChat/releases/latest";
-
   fetch(GITHUB_API, { headers: { "Accept": "application/vnd.github+json" } })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
       var apkAsset = null;
       if (data.assets) {
         for (var i = 0; i < data.assets.length; i++) {
@@ -25,21 +23,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       }
       if (apkAsset) {
-        var tagName = data.tag_name || "latest";
-        var sizeMB  = (apkAsset.size / (1024 * 1024)).toFixed(1);
+        latestAPKUrl = apkAsset.browser_download_url;
+        var tag = data.tag_name || "latest";
+        var mb = (apkAsset.size / 1048576).toFixed(1);
         versionLabel.innerHTML =
           "<span class=\"dot-pulse\"></span>" +
-          "Latest version available &nbsp;&middot;&nbsp; " + tagName + " &nbsp;&middot;&nbsp; " + sizeMB + " MB";
+          "Latest version available &nbsp;&middot;&nbsp; " + tag + " &nbsp;&middot;&nbsp; " + mb + " MB";
       } else {
-        versionLabel.innerHTML =
-          "<span class=\"dot-pulse\"></span>Latest version available";
+        latestAPKUrl = FALLBACK_URL;
+        versionLabel.innerHTML = "<span class=\"dot-pulse\"></span>Latest version available";
       }
     })
-    .catch(function() {
-      versionLabel.innerHTML =
-        "<span class=\"dot-pulse\"></span>Latest version available";
+    .catch(function () {
+      latestAPKUrl = FALLBACK_URL;
+      versionLabel.innerHTML = "<span class=\"dot-pulse\"></span>Latest version available";
     })
-    .finally(function() {
+    .finally(function () {
       btn.disabled = false;
       btn.classList.remove("loading");
     });
