@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    ClassChat Download Website – style.css
    ============================================================ */
 
@@ -298,6 +298,89 @@ body {
 
 .feature-pill:hover {
   background: rgba(99, 102, 241, 0.12);
+}
+
+/* ---------- Notice Board ---------- */
+.notice-board {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-left: 4px solid #f59e0b;
+  border-radius: 18px;
+  padding: 24px 22px;
+  margin-top: 28px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.02),
+    0 12px 30px rgba(245, 158, 11, 0.08);
+  text-align: left;
+  animation: slideUp 0.5s 0.65s ease both;
+}
+
+.notice-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.notice-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.notice-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.notice-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.notice-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fef3c7;
+  color: #b45309;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-text {
+  flex: 1;
+}
+
+.step-text strong {
+  color: #0f172a;
 }
 
 /* ---------- Footer ---------- */
